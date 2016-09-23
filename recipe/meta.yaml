@@ -10,7 +10,7 @@ source:
   md5: 9ab9f0341d83a2c7a1d996e7438ba8d0
 
 build:
-  number: 0
+  number: 1
   script: python setup.py install
   skip: True  # [win]
 
@@ -28,7 +28,7 @@ requirements:
     - matplotlib
     - h5py
     - astropy
-    - yt
+    - yt <3.3
 
 test:
   imports:
