@@ -28,7 +28,11 @@ requirements:
     - matplotlib
     - h5py
     - astropy
-    - yt <3.3
+
+    # We need to exclude yt 3.3.0 and 3.3.1 because they include a
+    # bug that causes Hyperion to not work properly when dealing with
+    # octree grids.
+    - yt !=3.3.0,!=3.3.1
 
 test:
   imports:
