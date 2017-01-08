@@ -8,6 +8,8 @@ source:
   fn: Hyperion-{{version}}.tar.gz
   url: https://pypi.io/packages/source/h/hyperion/Hyperion-{{version}}.tar.gz
   md5: 970ebfa8b65c4a181fcdd788ee71dd38
+  patches:
+    - setup.patch  # [py36]
 
 build:
   number: 2

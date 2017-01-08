@@ -1,0 +1,11 @@
+--- setup.py.orig	2017-01-08 09:15:36.000000000 +0000
++++ setup.py	2017-01-08 09:15:42.000000000 +0000
+@@ -98,8 +98,6 @@
+                 'hyperion.model.tests',
+                 'hyperion.sources',
+                 'hyperion.sources.tests',
+-                'hyperion.sphinx',
+-                'hyperion.sphinx.ext',
+                 'hyperion.testing',
+                 'hyperion.util',
+                 'hyperion.util.tests'],
