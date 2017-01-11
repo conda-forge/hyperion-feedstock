@@ -1,9 +1,10 @@
 # This file was generated automatically from conda-smithy. To update this configuration,
-# update the conda-forge.yaml and/or the recipe/meta.yaml.
+# update the conda-forge.yml and/or the recipe/meta.yaml.
 
 language: generic
 
 os: osx
+osx_image: beta-xcode6.1
 
 env:
   matrix:
@@ -14,6 +15,8 @@ env:
     - CONDA_NPY=111  CONDA_PY=34
     - CONDA_NPY=110  CONDA_PY=35
     - CONDA_NPY=111  CONDA_PY=35
+    - CONDA_NPY=110  CONDA_PY=36
+    - CONDA_NPY=111  CONDA_PY=36
   global:
     # The BINSTAR_TOKEN secure variable. This is defined canonically in conda-forge.yml.
     - secure: "VxewUxAzVcEkdQSnfWbepuVNGH3PWQUY19O8uyySZD5PwIqNYjWFoKjYLzsjuJ2kV6njHwj6elNJ7d7YFExgNBWKfkk+lJEnPS1qSTvUhPBotzcubYwoBRObrJDoV6EyIGbvtrysHFuHLJyFZ/c97DrSXR8uO7qEsb+mE78t2GYBtAmGAQSBKFIFw3sRyMGuE55NqBd0nn/83TUg9Ao0hMImqXPkZ0/m/exB9uuvbYker2c0VQLyTlutaNEi5h+WTDQIF4vlOvmtRVYWB0dGmSyaAH6u4ItAN+wz6e7LN1hjEtfvUCaskjXyf2AlEJyFHSDEV8T92pAgfPyP7wsRmxahho9yZPWVkf8hT9iFVDhELDHeb9l08aVRv+WoryV8/PBVjsHfABb3y1+n7G9fBtOLhfZyPcbnJ2LO6BldTRDitbJ/dSME+XLVfCRkO2WzPFJf6r3/1CfZ6wvUUfJ9CKvy3OxuARtxm+PmxHFs96U4YSb+PDaW4GPk4WSJmTpeBuZ0APcymTBpn7BbHhRy3jNUcQa+ul0HE889DdJKONMYqeVdbTRr9QNF3K+ZH5yG7iRmAwZ2i0o8NczFI+/gYqKiv8zRQdzDeJ3kT0aOKtokHfSiSVkrQkTvSwGCch1k8z0nv9aVCWlJEr0nKqwbz7k+zv/qp+o7Xn+PDXAPfzo="
@@ -27,12 +30,12 @@ before_install:
 
 install:
     - |
-      MINICONDA_URL="http://repo.continuum.io/miniconda"
+      MINICONDA_URL="https://repo.continuum.io/miniconda"
       MINICONDA_FILE="Miniconda3-latest-MacOSX-x86_64.sh"
-      curl -O "${MINICONDA_URL}/${MINICONDA_FILE}"
+      curl -L -O "${MINICONDA_URL}/${MINICONDA_FILE}"
       bash $MINICONDA_FILE -b
 
-      export PATH=/Users/travis/miniconda3/bin:$PATH
+      source /Users/travis/miniconda3/bin/activate root
       conda config --add channels conda-forge
       conda config --set show_channel_urls true
       conda install --yes --quiet conda-forge-build-setup
@@ -41,4 +44,4 @@ install:
 script:
   - conda build ./recipe
 
-  - ./ci_support/upload_or_check_non_existence.py ./recipe conda-forge --channel=main
+  - upload_or_check_non_existence ./recipe conda-forge --channel=main

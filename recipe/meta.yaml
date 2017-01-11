@@ -8,11 +8,13 @@ source:
   fn: Hyperion-{{version}}.tar.gz
   url: https://pypi.io/packages/source/h/hyperion/Hyperion-{{version}}.tar.gz
   md5: 970ebfa8b65c4a181fcdd788ee71dd38
+  patches:
+    - setup.patch  # [py36]
 
 build:
-  number: 1
+  number: 2
   script: python setup.py install
-  skip: True  # [win]
+  skip: True  # [win or py36]
 
 requirements:
 
@@ -28,7 +30,11 @@ requirements:
     - matplotlib
     - h5py
     - astropy
-    - yt <3.3
+
+    # We need to exclude yt 3.3.0 and 3.3.1 because they include a
+    # bug that causes Hyperion to not work properly when dealing with
+    # octree grids.
+    - yt !=3.3.0,!=3.3.1
 
 test:
   imports:
