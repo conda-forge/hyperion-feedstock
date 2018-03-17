@@ -10,7 +10,7 @@ source:
   md5: e1db1082e46bf69db0cc5f392b454eba
 
 build:
-  number: 0
+  number: 1
   script: python setup.py install
   skip: True  # [win]
 
@@ -19,12 +19,12 @@ requirements:
   build:
     - python
     - setuptools
-    - numpy x.x
+    - numpy 1.11.*
 
   run:
     - hyperion-fortran 0.9.9
     - python
-    - numpy x.x
+    - numpy >=1.11
     - matplotlib
     - h5py
     - astropy
