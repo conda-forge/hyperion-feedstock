@@ -1,4 +1,4 @@
-{% set version = "0.9.9" %}
+{% set version = "0.9.10" %}
 
 package:
   name: hyperion
@@ -7,32 +7,34 @@ package:
 source:
   fn: Hyperion-{{version}}.tar.gz
   url: https://pypi.io/packages/source/h/hyperion/Hyperion-{{version}}.tar.gz
-  md5: e1db1082e46bf69db0cc5f392b454eba
+  sha256: f80d62ee9212244aa39a2c59c3b6a767eb587a58883234122e790d5f383c9690
 
 build:
-  number: 1
-  script: python setup.py install
+  number: 1000
+  script: python -m pip install --no-deps --ignore-installed .
   skip: True  # [win]
 
 requirements:
-
   build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
     - python
+    - pip
     - setuptools
     - numpy 1.11.*
-
   run:
-    - hyperion-fortran 0.9.9
+    - hyperion-fortran 0.9.10
     - python
     - numpy >=1.11
-    - matplotlib
-    - h5py
-    - astropy
+    - matplotlib >=1.5
+    - h5py >=2.4
+    - astropy >=1.2
 
     # We need to exclude yt 3.3.0 and 3.3.1 because they include a
     # bug that causes Hyperion to not work properly when dealing with
     # octree grids.
-    - yt !=3.3.0,!=3.3.1
+    - yt >=3.2,!=3.3.0,!=3.3.1
 
 test:
   imports:
