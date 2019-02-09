@@ -19,6 +19,7 @@ requirements:
     - {{ compiler('c') }}
   host:
     - python
+    - pip
     - setuptools
     - numpy 1.11.*
   run:
