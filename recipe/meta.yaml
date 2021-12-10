@@ -2,16 +2,16 @@
 
 package:
   name: hyperion
-  version: {{version}}
+  version: {{ version }}
 
 source:
-  fn: Hyperion-{{version}}.tar.gz
-  url: https://pypi.io/packages/source/h/hyperion/Hyperion-{{version}}.tar.gz
+  fn: Hyperion-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/h/hyperion/Hyperion-{{ version }}.tar.gz
   sha256: f80d62ee9212244aa39a2c59c3b6a767eb587a58883234122e790d5f383c9690
 
 build:
-  number: 1000
-  script: python -m pip install --no-deps --ignore-installed .
+  number: 1001
+  script: {{ PYTHON }} -m pip install . --no-deps -vv
   skip: True  # [win]
 
 requirements:
@@ -46,6 +46,7 @@ test:
 about:
   home: https://github.com/hyperion-rt/hyperion
   license: BSD 2-Clause
+  license_file: LICENSE
   summary: Hyperion Radiation Transfer Code
 
 extra:
