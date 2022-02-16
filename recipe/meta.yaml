@@ -10,7 +10,7 @@ source:
   sha256: f80d62ee9212244aa39a2c59c3b6a767eb587a58883234122e790d5f383c9690
 
 build:
-  number: 1000
+  number: 1001
   script: python -m pip install --no-deps --ignore-installed .
   skip: True  # [win]
 
@@ -22,11 +22,11 @@ requirements:
     - python
     - pip
     - setuptools
-    - numpy 1.11.*
+    - numpy
   run:
     - hyperion-fortran 0.9.10
     - python
-    - numpy >=1.11
+    - {{ pin_compatible('numpy') }}
     - matplotlib >=1.5
     - h5py >=2.4
     - astropy >=1.2
