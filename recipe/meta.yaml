@@ -1,18 +1,18 @@
-{% set version = "0.9.10" %}
+{% set name = "hyperion" %}
+{% set version = "0.9.11" %}
 
 package:
-  name: hyperion
+  name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  fn: Hyperion-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/h/hyperion/Hyperion-{{ version }}.tar.gz
-  sha256: f80d62ee9212244aa39a2c59c3b6a767eb587a58883234122e790d5f383c9690
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/hyperion-{{ version }}.tar.gz
+  sha256: 097a4746ff2f054b6520e6811651605b85230461c541c97ad10d1c4ba6c7533c
 
 build:
-  number: 1001
-  script: python -m pip install --no-deps --ignore-installed .
-  skip: True  # [win]
+  skip: true  # [py<39]
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
 
 requirements:
   build:
@@ -20,35 +20,37 @@ requirements:
     - {{ compiler('cxx') }}
   host:
     - python
-    - pip
     - setuptools
+    - setuptools-scm >=6.2
     - numpy
+    - pip
   run:
-    - hyperion-fortran 0.9.10
+    - hyperion-fortran 0.9.11
     - python
-    - {{ pin_compatible('numpy') }}
     - matplotlib-base >=1.5
-    - h5py >=2.4
     - astropy >=1.2
-
-    # We need to exclude yt 3.3.0 and 3.3.1 because they include a
-    # bug that causes Hyperion to not work properly when dealing with
-    # octree grids.
-    - yt >=3.2,!=3.3.0,!=3.3.1
+    - h5py >=2.4
+    - decorator
+    - {{ pin_compatible('numpy') }}
+    - yt >=3.2
 
 test:
   imports:
     - hyperion
     - hyperion.util.interpolate
   commands:
+    - pip check
     - hyperion --help
+  requires:
+    - pip
 
 about:
-  home: https://github.com/hyperion-rt/hyperion
+  home: http://www.hyperion-rt.org
+  summary: Monte-Carlo Radiative Transfer Code
   license: BSD-2-Clause
-  license_file: LICENSE
-  summary: Hyperion Radiation Transfer Code
+  license_file:
+    - LICENSE
 
 extra:
   recipe-maintainers:
-    - astrofrog-conda-forge
+    - astrofrog
