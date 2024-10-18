@@ -12,7 +12,7 @@ source:
 build:
   skip: true  # [py<39 or win]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 2
+  number: 3
 
 requirements:
   build:
@@ -31,6 +31,7 @@ requirements:
   run:
     - hyperion-fortran 0.9.11
     - python
+    - numpy >=1.11,<2
     - matplotlib-base >=1.5
     - astropy >=1.2
     - h5py >=2.4
