@@ -12,7 +12,7 @@ source:
 build:
   skip: true  # [py<39 or win]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 3
+  number: 4
 
 requirements:
   build:
@@ -33,7 +33,7 @@ requirements:
     - python
     - numpy >=1.11,<2
     - matplotlib-base >=1.5
-    - astropy >=1.2
+    - astropy-base >=1.2
     - h5py >=2.4
     - decorator
     - yt >=3.2
