@@ -6,13 +6,13 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/hyperion-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/hyperion-{{ version }}.tar.gz
   sha256: 097a4746ff2f054b6520e6811651605b85230461c541c97ad10d1c4ba6c7533c
 
 build:
   skip: true  # [py<39 or win]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 4
+  number: 5
 
 requirements:
   build:
@@ -31,7 +31,7 @@ requirements:
   run:
     - hyperion-fortran 0.9.11
     - python
-    - numpy >=1.11,<2
+    - numpy >=1.11
     - matplotlib-base >=1.5
     - astropy-base >=1.2
     - h5py >=2.4
